@@ -86,7 +86,7 @@ public class KeystoreManager {
                 X509Certificate xCert = (X509Certificate) cert;
                 String expiryDate = new SimpleDateFormat("dd/MM/yyyy").format(xCert.getNotAfter());
 
-                logger.log(Level.FINEST, "Checking certificate {0} (expires {1}).", new Object[]{alias, expiryDate});
+                logger.log(Level.FINE, "Checking certificate {0} (expires {1}).", new Object[]{alias, expiryDate});
                 // Check the certificate validity, and remove it if it's expired.
                 try {
                     xCert.checkValidity();
