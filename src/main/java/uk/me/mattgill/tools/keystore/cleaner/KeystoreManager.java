@@ -12,6 +12,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,15 +83,16 @@ public class KeystoreManager {
 
             // If the certificate is an X509 certificate
             if (cert.getType().equals("X.509")) {
-                logger.log(Level.FINEST, "Checking certificate {0}.", alias);
-
-                // Check the certificate validity, and remove it if it's expired.
                 X509Certificate xCert = (X509Certificate) cert;
+                String expiryDate = new SimpleDateFormat("dd/MM/yyyy").format(xCert.getNotAfter());
+
+                logger.log(Level.FINEST, "Checking certificate {0} (expires {1}).", new Object[]{alias, expiryDate});
+                // Check the certificate validity, and remove it if it's expired.
                 try {
                     xCert.checkValidity();
                 } catch (CertificateExpiredException | CertificateNotYetValidException e) {
                     store.deleteEntry(alias);
-                    logger.log(Level.FINE, "Removed certificate {0}.", alias);
+                    logger.log(Level.INFO, "Removed certificate {0} (expired {1}).", new Object[]{alias, expiryDate});
                     removedKeys++;
                 }
             }
