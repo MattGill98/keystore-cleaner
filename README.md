@@ -17,5 +17,5 @@ The runnable JAR will then be available in target/ with the `jar-with-dependenci
 Run the project with no options to see the usage.
 
 ~~~
-java -jar target/keystore-cleaner-0.1-jar-with-dependencies.jar
+java -jar target/keystore-cleaner-1.0-jar-with-dependencies.jar
 ~~~
