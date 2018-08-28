@@ -1,4 +1,4 @@
-package uk.me.mattgill.tools.keystore.cleaner;
+package fish.payara.internal.tools.keystore;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
